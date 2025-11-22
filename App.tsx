@@ -14,17 +14,17 @@ import { RefreshCcw } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const App: React.FC = () => {
-  const { 
-    view, 
-    questions, 
-    userAnswers, 
-    isReviewMode, 
-    reviewFilter, 
+  const {
+    view,
+    questions,
+    userAnswers,
+    isReviewMode,
+    reviewFilter,
     error,
-    retryQuiz, 
+    retryQuiz,
     resetGame,
-    setReviewMode, 
-    exitReview 
+    setReviewMode,
+    exitReview
   } = useGameStore();
 
   const renderContent = () => {
@@ -39,7 +39,7 @@ const App: React.FC = () => {
             <div className="border-4 border-black p-8 bg-brut-red text-white shadow-hard max-w-md">
               <h2 className="text-3xl font-black mb-4">SYSTEM ERROR</h2>
               <p className="font-mono mb-8">{error || "Unknown anomaly detected."}</p>
-              <BrutalistButton onClick={resetGame} variant="primary" className="bg-white text-black border-white hover:bg-black hover:text-white">
+              <BrutalistButton onClick={resetGame} variant="secondary" className="border-white hover:bg-black hover:text-white">
                 <RefreshCcw className="mr-2" /> REBOOT
               </BrutalistButton>
             </div>

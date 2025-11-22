@@ -25,7 +25,7 @@ export const playSound = (type: 'correct' | 'incorrect' | 'tick' | 'start' | 'fi
 
     switch (type) {
       case 'correct':
-        // Sharp, ascending square wave - "Digital Win"
+
         osc.type = 'square';
         osc.frequency.setValueAtTime(440, now);
         osc.frequency.exponentialRampToValueAtTime(880, now + 0.1);
@@ -36,7 +36,7 @@ export const playSound = (type: 'correct' | 'incorrect' | 'tick' | 'start' | 'fi
         break;
 
       case 'incorrect':
-        // Low, dissonant sawtooth - "Brutal Buzz"
+
         osc.type = 'sawtooth';
         osc.frequency.setValueAtTime(150, now);
         osc.frequency.linearRampToValueAtTime(100, now + 0.3);
@@ -47,7 +47,7 @@ export const playSound = (type: 'correct' | 'incorrect' | 'tick' | 'start' | 'fi
         break;
 
       case 'tick':
-        // Short, dry click - "Clock Mech"
+
         osc.type = 'triangle';
         osc.frequency.setValueAtTime(800, now);
         gain.gain.setValueAtTime(0.05, now);
@@ -57,7 +57,7 @@ export const playSound = (type: 'correct' | 'incorrect' | 'tick' | 'start' | 'fi
         break;
 
       case 'start':
-        // Power up slide
+
         osc.type = 'square';
         osc.frequency.setValueAtTime(220, now);
         osc.frequency.exponentialRampToValueAtTime(880, now + 0.4);
@@ -68,7 +68,7 @@ export const playSound = (type: 'correct' | 'incorrect' | 'tick' | 'start' | 'fi
         break;
         
       case 'finish':
-        // Success chord-ish arpeggio
+
         const frequencies = [440, 554, 659, 880]; // A major
         frequencies.forEach((freq, i) => {
           const o = ctx.createOscillator();

@@ -18,10 +18,10 @@ const QuizEngine: React.FC = () => {
   const [isAnswerLocked, setIsAnswerLocked] = useState(false);
   const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
   
-  // Ref to prevent double sound playing in Strict Mode
+
   const processedAnswerRef = useRef<string | null>(null);
 
-  // Shuffle options when question changes
+
   useEffect(() => {
     if (currentQuestion) {
       setShuffledOptions([...currentQuestion.options].sort(() => Math.random() - 0.5));
@@ -32,7 +32,7 @@ const QuizEngine: React.FC = () => {
     }
   }, [currentQuestion]);
 
-  // Timer logic with sound
+
   useEffect(() => {
     if (isAnswerLocked) return;
 
@@ -45,7 +45,7 @@ const QuizEngine: React.FC = () => {
       }, 1000);
       return () => clearInterval(interval);
     } else if (timer === 0) {
-        // Time expired
+
         handleAnswerSubmit(null);
     }
   }, [timer, isAnswerLocked]);
@@ -72,7 +72,7 @@ const QuizEngine: React.FC = () => {
         timeSpent: QUESTION_TIMER_SECONDS - timer
     };
 
-    // Delay before recording answer and moving on (to show result)
+
     setTimeout(() => {
         answerQuestion(newAnswer);
         
@@ -88,13 +88,13 @@ const QuizEngine: React.FC = () => {
     }, 1500);
   };
 
-  // Progress bar width calculation
+
   const progressPercent = ((currentQuestionIndex + 1) / questions.length) * 100;
   
-  // Calculate current score for display
+
   const currentScore = useGameStore(state => state.score);
 
-  // Determine what to display in the TOPIC box
+
   const displayTopic = config.topic === 'Custom' && config.customTopic 
     ? config.customTopic 
     : config.topic;
@@ -185,7 +185,7 @@ const QuizEngine: React.FC = () => {
                             } else if (option === selectedOption) {
                                 variant = 'danger';
                             } else {
-                                variant = 'outline'; // Fade out others
+                                variant = 'outline';
                             }
                         }
 

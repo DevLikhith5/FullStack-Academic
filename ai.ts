@@ -16,7 +16,7 @@ export const generateQuizQuestions = async (
 
     let subject = topic === 'All' ? 'General Knowledge' : topic;
     
-    // Override subject if it's a custom topic
+
     if (topic === 'Custom' && customTopic && customTopic.trim() !== '') {
       subject = customTopic;
     }
@@ -55,21 +55,20 @@ export const generateQuizQuestions = async (
     if (response.text) {
       const data = JSON.parse(response.text);
       return data.map((q: any, index: number) => {
-         // Sanitize options and correctAnswer to prevent whitespace mismatches
+
          const options = q.options.map((o: string) => String(o).trim());
          let correctAnswer = String(q.correctAnswer).trim();
          
-         // Robust check: Ensure correct answer is actually in the options
+
          const exactMatchIndex = options.findIndex((o: string) => o === correctAnswer);
          
          if (exactMatchIndex === -1) {
-            // Try case-insensitive match
+
             const caseIndex = options.findIndex((o: string) => o.toLowerCase() === correctAnswer.toLowerCase());
             if (caseIndex !== -1) {
                 correctAnswer = options[caseIndex];
             } else {
-                // Fallback: If AI hallucinates a completely different answer, default to the first option
-                // This prevents the game from breaking (no green answer shown)
+
                 console.warn(`AI Data Mismatch: Correct answer '${correctAnswer}' not found in options [${options.join(', ')}]. Defaulting to first option.`);
                 correctAnswer = options[0];
             }

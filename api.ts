@@ -2,8 +2,7 @@
 import axios from 'axios';
 import { QuizResult } from './types';
 
-// Default json-server port is usually 3000 or 3001. 
-// Ensure you run `npx json-server --watch db.json --port 3001`
+
 const API_URL = 'http://localhost:3001';
 
 export const api = axios.create({
@@ -17,7 +16,7 @@ export const saveQuizResult = async (result: Omit<QuizResult, 'id'>) => {
     return response.data;
   } catch (error) {
     console.error("Failed to save result to json-server:", error);
-    // We don't throw here to prevent blocking the UI flow, just log the error.
+
     return null; 
   }
 };

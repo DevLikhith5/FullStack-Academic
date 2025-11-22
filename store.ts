@@ -47,7 +47,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   startGame: async () => {
     const { config } = get();
     
-    // Basic validation for custom topic
+
     if (config.topic === 'Custom' && (!config.customTopic || config.customTopic.trim() === '')) {
         alert("PLEASE ENTER A CUSTOM TOPIC TO PROCEED.");
         return;
@@ -83,7 +83,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const newAnswers = [...state.userAnswers, answer];
     const newScore = answer.isCorrect ? state.score + 1 : state.score;
     
-    // Check if it was the last question
+
     const isFinished = newAnswers.length === state.questions.length;
 
     set({
@@ -92,7 +92,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
     });
 
     if (isFinished) {
-        // Persist result to json-server
+
         if (state.user) {
             const displayTopic = state.config.topic === 'Custom' && state.config.customTopic 
                 ? state.config.customTopic 
@@ -106,8 +106,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
                 totalQuestions: state.questions.length,
                 timestamp: new Date().toISOString()
             }).then(() => {
-                // Optional: refresh history in background
-                // get().loadHistory(); 
+
             });
         }
 
@@ -123,7 +122,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   }),
 
   retryQuiz: () => {
-      // Re-use same questions, reset state
+
       set((state) => ({
           view: 'QUIZ',
           currentQuestionIndex: 0,

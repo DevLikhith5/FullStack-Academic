@@ -12,7 +12,7 @@ const AuthPage: React.FC = () => {
   const handleAuth = (provider: 'google' | 'github') => {
     setIsLoading(true);
     
-    // Simulate network request
+
     setTimeout(() => {
       const mockUser = {
         id: `${provider}-${Date.now()}`,

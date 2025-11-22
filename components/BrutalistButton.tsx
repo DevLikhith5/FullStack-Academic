@@ -47,7 +47,7 @@ const BrutalistButton: React.FC<BrutalistButtonProps> = ({
     lg: "text-lg lg:text-xl py-4 px-8 lg:py-5 lg:px-10",
     xl: "text-xl md:text-2xl lg:text-3xl py-6 px-10 lg:py-8 lg:px-12",
   };
-  
+
   // Framer Motion variants for hover states
   const buttonVariants = {
     hover: {
