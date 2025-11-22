@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TriviaTrek: Journey through a World of Questions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+      // Polyfill for process.env to support libraries that expect it
+      window.process = {
+        env: {
+          NODE_ENV: 'production'
+        }
+      };
+
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Space Grotesk"', 'sans-serif'],
+              mono: ['"Space Mono"', 'monospace'],
+            },
+            colors: {
+              'brut-black': '#000000',
+              'brut-white': '#FFFFFF',
+              'brut-red': '#FF2222',
+              'brut-cyan': '#00AEEF',
+              'brut-green': '#00C853',
+              'brut-orange': '#FF6D00',
+            },
+            boxShadow: {
+              'hard': '8px 8px 0px 0px #000000',
+              'hard-sm': '4px 4px 0px 0px #000000',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #FFFFFF;
+        color: #000000;
+      }
+      /* Custom scrollbar for brutalist feel */
+      ::-webkit-scrollbar {
+        width: 12px;
+        background: #000000;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #FF2222;
+        border: 2px solid #000000;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "@google/genai": "https://esm.run/@google/genai",
+    "zustand": "https://esm.sh/zustand@5.0.3?external=react",
+    "framer-motion": "https://esm.sh/framer-motion@11.11.17?external=react,react-dom",
+    "axios": "https://esm.sh/axios@1.7.7"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
