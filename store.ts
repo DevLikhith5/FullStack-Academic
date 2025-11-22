@@ -62,6 +62,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
           config.questionCount,
           config.customTopic
       );
+      
       set({
         questions,
         view: 'QUIZ',

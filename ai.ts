@@ -50,6 +50,7 @@ export const generateQuizQuestions = async (
         }
       }
     });
+    console.log("RESPONSE: ",response)
 
     if (response.text) {
       const data = JSON.parse(response.text);

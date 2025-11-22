@@ -8,6 +8,24 @@
       "score": 5,
       "totalQuestions": 5,
       "timestamp": "2025-11-22T05:57:23.668Z"
+    },
+    {
+      "id": "12b4",
+      "userId": "google-1763792504617",
+      "topic": "Generate 10 Java SE 17 OCP-style multiple-choice questions covering modules, \nrecords, sealed classes, lambdas, streams, generics, exceptions, NIO.2, and concurrency. \nMake them tricky with compile-time and runtime traps. Provide answers with brief explanations.\n",
+      "difficulty": "Medium",
+      "score": 2,
+      "totalQuestions": 5,
+      "timestamp": "2025-11-22T06:23:17.098Z"
+    },
+    {
+      "id": "30e5",
+      "userId": "google-1763792745306",
+      "topic": "questions on golalng",
+      "difficulty": "Medium",
+      "score": 5,
+      "totalQuestions": 5,
+      "timestamp": "2025-11-22T06:27:01.622Z"
     }
   ]
 }
