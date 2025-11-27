@@ -1,6 +1,5 @@
 
 import axios from 'axios';
-import { QuizResult } from './types';
 
 
 const API_URL = 'http://localhost:3001';
@@ -10,9 +9,9 @@ export const api = axios.create({
   timeout: 5000,
 });
 
-export const saveQuizResult = async (result: Omit<QuizResult, 'id'>) => {
+export const saveQuizResult = async (result) => {
   try {
-    const response = await api.post<QuizResult>('/results', result);
+    const response = await api.post('/results', result);
     return response.data;
   } catch (error) {
     console.error("Failed to save result to json-server:", error);
@@ -21,9 +20,9 @@ export const saveQuizResult = async (result: Omit<QuizResult, 'id'>) => {
   }
 };
 
-export const fetchUserHistory = async (userId: string) => {
+export const fetchUserHistory = async (userId) => {
   try {
-    const response = await api.get<QuizResult[]>(`/results?userId=${userId}&_sort=timestamp&_order=desc`);
+    const response = await api.get(`/results?userId=${userId}&_sort=timestamp&_order=desc`);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch history from json-server:", error);

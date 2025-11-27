@@ -5,7 +5,7 @@ import BrutalistButton from './BrutalistButton';
 import { ArrowLeft, Calendar, Target, Hash } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const HistoryView: React.FC = () => {
+const HistoryView = () => {
   const { history, loadHistory, resetGame, user } = useGameStore();
 
   useEffect(() => {

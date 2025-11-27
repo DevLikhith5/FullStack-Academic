@@ -4,12 +4,12 @@ import { useGameStore } from '../store';
 import { Github, Globe, Lock, UserPlus, LogIn } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const AuthPage: React.FC = () => {
+const AuthPage = () => {
   const { login } = useGameStore();
   const [isLoading, setIsLoading] = useState(false);
-  const [mode, setMode] = useState<'signin' | 'signup'>('signin');
+  const [mode, setMode] = useState('signin');
 
-  const handleAuth = (provider: 'google' | 'github') => {
+  const handleAuth = (provider) => {
     setIsLoading(true);
     
 

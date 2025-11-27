@@ -1,14 +1,25 @@
 
 
-import React from 'react';
-import { Topic, TOPICS, Difficulty } from '../types';
+
 import BrutalistButton from './BrutalistButton';
 import { Zap, Globe, Cpu, BookOpen, Palette, Play, Music, Trophy, Map, Settings, Film, PenTool, Archive } from 'lucide-react';
 import { useGameStore } from '../store';
 import { playSound } from '../utils/sound';
-import { motion, Variants, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const LandingPage: React.FC = () => {
+const TOPICS = [
+  "Science",
+  "History",
+  "Tech",
+  "Arts",
+  "Music",
+  "Sports",
+  "Geography",
+  "Movies",
+];
+
+
+const LandingPage = () => {
   const { config, setPendingConfig, startGame, setView } = useGameStore();
 
   const handleStart = () => {
@@ -16,7 +27,7 @@ const LandingPage: React.FC = () => {
     startGame();
   };
 
-  const getIcon = (topic: string) => {
+  const getIcon = (topic) => {
     switch (topic) {
       case 'Science': return <Zap size={20} />;
       case 'History': return <BookOpen size={20} />;
@@ -31,10 +42,10 @@ const LandingPage: React.FC = () => {
     }
   };
 
-  const difficulties: Difficulty[] = ['Easy', 'Medium', 'Hard', 'Brutal'];
+  const difficulties = ['Easy', 'Medium', 'Hard', 'Brutal'];
   const counts = [5, 10, 15, 20];
 
-  const container: Variants = {
+  const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
@@ -44,14 +55,14 @@ const LandingPage: React.FC = () => {
     }
   };
 
-  const item: Variants = {
+  const item = {
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 10 } }
   };
 
 
 
-  const FloatingIcon = ({ children, delay, duration, top, left, right, bottom }: any) => (
+  const FloatingIcon = ({ children, delay, duration, top, left, right, bottom }) => (
     <motion.div
       animate={{ y: [-15, 15, -15], rotate: [0, 5, -5, 0] }}
       transition={{ duration: duration, repeat: Infinity, ease: "easeInOut", delay: delay }}
@@ -62,7 +73,7 @@ const LandingPage: React.FC = () => {
     </motion.div>
   );
 
-  const GlitchText = ({ text }: { text: string }) => (
+  const GlitchText = ({ text }) => (
     <div className="relative inline-block">
       <motion.span
         className="absolute top-0 left-0 -z-10 text-brut-red opacity-70"

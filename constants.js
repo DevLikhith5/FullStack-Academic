@@ -1,6 +1,5 @@
-import { Question, Topic } from './types';
 
-export const QUESTIONS: Question[] = [
+export const QUESTIONS = [
   // Science
   {
     id: 'sci-1',

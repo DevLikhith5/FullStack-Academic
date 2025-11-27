@@ -1,5 +1,4 @@
 
-import React from 'react';
 import Layout from './components/Layout';
 import LandingPage from './components/LandingPage';
 import QuizEngine from './components/QuizEngine';
@@ -13,7 +12,7 @@ import BrutalistButton from './components/BrutalistButton';
 import { RefreshCcw } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-const App: React.FC = () => {
+const App = () => {
   const {
     view,
     questions,

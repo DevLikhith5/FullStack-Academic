@@ -1,18 +1,18 @@
 
 import React from 'react';
-import { motion, HTMLMotionProps } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-interface BrutalistButtonProps extends HTMLMotionProps<"button"> {
-  variant?: 'primary' | 'secondary' | 'accent' | 'danger' | 'success' | 'outline';
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  fullWidth?: boolean;
-  active?: boolean;
-  disabled?: boolean;
-  children?: React.ReactNode;
-  className?: string;
-}
+// interface BrutalistButtonProps {
+//   variant?: 'primary' | 'secondary' | 'accent' | 'danger' | 'success' | 'outline';
+//   size?: 'sm' | 'md' | 'lg' | 'xl';
+//   fullWidth?: boolean;
+//   active?: boolean;
+//   disabled?: boolean;
+//   children?: React.ReactNode;
+//   className?: string;
+// }
 
-const BrutalistButton: React.FC<BrutalistButtonProps> = ({
+const BrutalistButton = ({
   children,
   variant = 'primary',
   size = 'md',

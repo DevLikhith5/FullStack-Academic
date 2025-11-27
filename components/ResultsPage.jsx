@@ -1,18 +1,17 @@
 import React from 'react';
-import { Question, UserAnswer } from '../types';
 import BrutalistButton from './BrutalistButton';
 import { RefreshCw, List, AlertTriangle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-interface ResultsPageProps {
-  questions: Question[];
-  userAnswers: UserAnswer[];
-  onRetry: () => void;
-  onReview: (filter: 'ALL' | 'INCORRECT') => void;
-  onHome: () => void;
-}
+// interface ResultsPageProps {
+//   questions: Question[];
+//   userAnswers: UserAnswer[];
+//   onRetry: () => void;
+//   onReview: (filter: 'ALL' | 'INCORRECT') => void;
+//   onHome: () => void;
+// }
 
-const ResultsPage: React.FC<ResultsPageProps> = ({ questions, userAnswers, onRetry, onReview, onHome }) => {
+const ResultsPage = ({ questions, userAnswers, onRetry, onReview, onHome }) => {
   const correctCount = userAnswers.filter(a => a.isCorrect).length;
   const totalQuestions = questions.length;
   const scorePercentage = Math.round((correctCount / totalQuestions) * 100);
@@ -113,6 +112,7 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ questions, userAnswers, onRet
             <List /> Review Path
         </h3>
         <div className="flex flex-col gap-4">
+
             <BrutalistButton onClick={() => onReview('ALL')} fullWidth variant="outline" className="bg-white">
                 Review All Answers
             </BrutalistButton>

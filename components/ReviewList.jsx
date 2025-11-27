@@ -1,16 +1,15 @@
 import React from 'react';
-import { Question, UserAnswer } from '../types';
 import BrutalistButton from './BrutalistButton';
 import { Check, X, ArrowLeft } from 'lucide-react';
 
-interface ReviewListProps {
-  questions: Question[];
-  userAnswers: UserAnswer[];
-  filter: 'ALL' | 'INCORRECT';
-  onBack: () => void;
-}
+// interface ReviewListProps {
+//   questions: Question[];
+//   userAnswers: UserAnswer[];
+//   filter: 'ALL' | 'INCORRECT';
+//   onBack: () => void;
+// }
 
-const ReviewList: React.FC<ReviewListProps> = ({ questions, userAnswers, filter, onBack }) => {
+const ReviewList = ({ questions, userAnswers, filter, onBack }) => {
   const filteredData = userAnswers.map(ans => {
     const question = questions.find(q => q.id === ans.questionId);
     return { answer: ans, question };

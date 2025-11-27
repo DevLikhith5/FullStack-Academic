@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState, useRef } from 'react';
-import { UserAnswer } from '../types';
+
 import { QUESTION_TIMER_SECONDS } from '../constants';
 import BrutalistButton from './BrutalistButton';
 import { Clock, Target, Check, X, LogOut } from 'lucide-react';
@@ -8,18 +8,18 @@ import { useGameStore } from '../store';
 import { playSound } from '../utils/sound';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const QuizEngine: React.FC = () => {
+const QuizEngine = () => {
     const { questions, currentQuestionIndex, config, answerQuestion, nextQuestion, resetGame } = useGameStore();
 
     const currentQuestion = questions[currentQuestionIndex];
 
     const [timer, setTimer] = useState(QUESTION_TIMER_SECONDS);
-    const [selectedOption, setSelectedOption] = useState<string | null>(null);
+    const [selectedOption, setSelectedOption] = useState(null);
     const [isAnswerLocked, setIsAnswerLocked] = useState(false);
-    const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
+    const [shuffledOptions, setShuffledOptions] = useState([]);
 
 
-    const processedAnswerRef = useRef<string | null>(null);
+    const processedAnswerRef = useRef(null);
 
 
     useEffect(() => {
@@ -50,7 +50,7 @@ const QuizEngine: React.FC = () => {
         }
     }, [timer, isAnswerLocked]);
 
-    const handleAnswerSubmit = (option: string | null) => {
+    const handleAnswerSubmit = (option) => {
         if (isAnswerLocked || processedAnswerRef.current !== null) return;
 
         setIsAnswerLocked(true);
@@ -65,7 +65,7 @@ const QuizEngine: React.FC = () => {
             playSound('incorrect');
         }
 
-        const newAnswer: UserAnswer = {
+        const newAnswer = {
             questionId: currentQuestion.id,
             selectedAnswer: option || 'TIMEOUT',
             isCorrect: isCorrect,
@@ -188,7 +188,7 @@ const QuizEngine: React.FC = () => {
                         {/* Answers Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
                             {shuffledOptions.map((option, idx) => {
-                                let variant: 'primary' | 'success' | 'danger' | 'outline' = 'primary';
+                                let variant = 'primary';
 
                                 if (isAnswerLocked) {
                                     if (option === currentQuestion.correctAnswer) {

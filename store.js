@@ -1,26 +1,26 @@
 
 import { create } from 'zustand';
-import { GameState, Question, UserAnswer, QuizConfig, Topic, User } from './types';
+
 import { generateQuizQuestions } from './ai';
 import { saveQuizResult, fetchUserHistory } from './api';
 
-interface GameStore extends GameState {
-  // Actions
-  setPendingConfig: (config: Partial<QuizConfig>) => void;
-  startGame: () => Promise<void>;
-  answerQuestion: (answer: UserAnswer) => void;
-  nextQuestion: () => void;
-  retryQuiz: () => void;
-  resetGame: () => void;
-  setReviewMode: (filter: 'ALL' | 'INCORRECT') => void;
-  exitReview: () => void;
-  login: (user: User) => void;
-  logout: () => void;
-  loadHistory: () => Promise<void>;
-  setView: (view: GameState['view']) => void;
-}
+// interface GameStore extends GameState {
+//   // Actions
+//   setPendingConfig: (config: Partial<QuizConfig>) => void;
+//   startGame: () => Promise<void>;
+//   answerQuestion: (answer: UserAnswer) => void;
+//   nextQuestion: () => void;
+//   retryQuiz: () => void;
+//   resetGame: () => void;
+//   setReviewMode: (filter: 'ALL' | 'INCORRECT') => void;
+//   exitReview: () => void;
+//   login: (user: User) => void;
+//   logout: () => void;
+//   loadHistory: () => Promise<void>;
+//   setView: (view: GameState['view']) => void;
+// }
 
-export const useGameStore = create<GameStore>((set, get) => ({
+export const useGameStore = create((set, get) => ({
   view: 'AUTH',
   config: {
     topic: 'All',
@@ -78,7 +78,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
     }
   },
 
-  answerQuestion: (answer: UserAnswer) => {
+  answerQuestion: (answer) => {
     const state = get();
     const newAnswers = [...state.userAnswers, answer];
     const newScore = answer.isCorrect ? state.score + 1 : state.score;
@@ -144,7 +144,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   setReviewMode: (filter) => set({ isReviewMode: true, reviewFilter: filter }),
   exitReview: () => set({ isReviewMode: false }),
 
-  login: (user: User) => set({ user, view: 'LANDING' }),
+  login: (user) => set({ user, view: 'LANDING' }),
   logout: () => set({ 
     user: undefined, 
     view: 'AUTH', 

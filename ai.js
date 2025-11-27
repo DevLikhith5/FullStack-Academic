@@ -1,13 +1,13 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
-import { Question, Topic, Difficulty } from "./types";
+
 
 export const generateQuizQuestions = async (
-  topic: Topic | 'All',
-  difficulty: Difficulty,
-  count: number,
-  customTopic?: string
-): Promise<Question[]> => {
+  topic,
+  difficulty,
+  count,
+  customTopic
+) => {
   try {
     if (!process.env.API_KEY) {
       throw new Error("API Key missing");
@@ -62,17 +62,17 @@ export const generateQuizQuestions = async (
 
     if (response.text) {
       const data = JSON.parse(response.text);
-      return data.map((q: any, index: number) => {
+      return data.map((q, index) => {
 
-        const options = q.options.map((o: string) => String(o).trim());
+        const options = q.options.map((o) => String(o).trim());
         let correctAnswer = String(q.correctAnswer).trim();
 
 
-        const exactMatchIndex = options.findIndex((o: string) => o === correctAnswer);
+        const exactMatchIndex = options.findIndex((o) => o === correctAnswer);
 
         if (exactMatchIndex === -1) {
 
-          const caseIndex = options.findIndex((o: string) => o.toLowerCase() === correctAnswer.toLowerCase());
+          const caseIndex = options.findIndex((o) => o.toLowerCase() === correctAnswer.toLowerCase());
           if (caseIndex !== -1) {
             correctAnswer = options[caseIndex];
           } else {

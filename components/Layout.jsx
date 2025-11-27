@@ -4,7 +4,7 @@ import { useGameStore } from '../store';
 import { LogOut, User } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Layout = ({ children }) => {
   const { resetGame, user, logout, view } = useGameStore();
 
   const handleTitleClick = () => {
@@ -62,9 +62,9 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     </motion.div>
   );
 
-  const containerRef = React.useRef<HTMLElement>(null);
+  const containerRef = React.useRef(null);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+  const handleMouseMove = (e) => {
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
       const x = e.clientX - rect.left;

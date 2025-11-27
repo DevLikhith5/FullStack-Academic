@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Zap } from 'lucide-react';
 
-const LoadingScreen: React.FC = () => {
+const LoadingScreen = () => {
   const [text, setText] = useState("INITIALIZING");
 
   useEffect(() => {
