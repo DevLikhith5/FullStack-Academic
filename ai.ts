@@ -10,19 +10,27 @@ export const generateQuizQuestions = async (
 ): Promise<Question[]> => {
   try {
     if (!process.env.API_KEY) {
-        throw new Error("API Key missing");
+      throw new Error("API Key missing");
     }
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
     let subject = topic === 'All' ? 'General Knowledge' : topic;
-    
+
 
     if (topic === 'Custom' && customTopic && customTopic.trim() !== '') {
       subject = customTopic;
     }
 
-    const prompt = `Generate ${count} multiple-choice trivia questions about: "${subject}". 
+    const prompt = `Generate ${count} unique, diverse, and non-repetitive multiple-choice trivia questions about: "${subject}". 
     Difficulty level: ${difficulty}.
+    
+    Guidelines:
+    - Ensure questions cover different aspects/sub-topics of "${subject}".
+    - Avoid common clichés or extremely well-known facts unless the difficulty is 'Easy'.
+    - Make options plausible but clearly distinguishable.
+    - Do not repeat questions or very similar concepts.
+    - If the topic is broad, ensure a wide variety of sub-themes.
+
     Return JSON format. Each question must have an 'id', 'text', 'options' (array of 4 strings), 'correctAnswer' (must be exactly one of the options), 'explanation', and 'topic'.
     Ensure the 'correctAnswer' string matches one of the 'options' strings exactly, character for character.`;
 
@@ -38,7 +46,7 @@ export const generateQuizQuestions = async (
             properties: {
               id: { type: Type.STRING },
               text: { type: Type.STRING },
-              options: { 
+              options: {
                 type: Type.ARRAY,
                 items: { type: Type.STRING }
               },
@@ -50,40 +58,40 @@ export const generateQuizQuestions = async (
         }
       }
     });
-    console.log("RESPONSE: ",response)
+    console.log("RESPONSE: ", response)
 
     if (response.text) {
       const data = JSON.parse(response.text);
       return data.map((q: any, index: number) => {
 
-         const options = q.options.map((o: string) => String(o).trim());
-         let correctAnswer = String(q.correctAnswer).trim();
-         
+        const options = q.options.map((o: string) => String(o).trim());
+        let correctAnswer = String(q.correctAnswer).trim();
 
-         const exactMatchIndex = options.findIndex((o: string) => o === correctAnswer);
-         
-         if (exactMatchIndex === -1) {
 
-            const caseIndex = options.findIndex((o: string) => o.toLowerCase() === correctAnswer.toLowerCase());
-            if (caseIndex !== -1) {
-                correctAnswer = options[caseIndex];
-            } else {
+        const exactMatchIndex = options.findIndex((o: string) => o === correctAnswer);
 
-                console.warn(`AI Data Mismatch: Correct answer '${correctAnswer}' not found in options [${options.join(', ')}]. Defaulting to first option.`);
-                correctAnswer = options[0];
-            }
-         }
+        if (exactMatchIndex === -1) {
 
-         return {
-            ...q,
-            options,
-            correctAnswer,
-            id: `ai-${Date.now()}-${index}`,
-            topic: topic === 'All' ? q.topic : topic
-         };
+          const caseIndex = options.findIndex((o: string) => o.toLowerCase() === correctAnswer.toLowerCase());
+          if (caseIndex !== -1) {
+            correctAnswer = options[caseIndex];
+          } else {
+
+            console.warn(`AI Data Mismatch: Correct answer '${correctAnswer}' not found in options [${options.join(', ')}]. Defaulting to first option.`);
+            correctAnswer = options[0];
+          }
+        }
+
+        return {
+          ...q,
+          options,
+          correctAnswer,
+          id: `ai-${Date.now()}-${index}`,
+          topic: topic === 'All' ? q.topic : topic
+        };
       });
     }
-    
+
     throw new Error("No data received from AI");
   } catch (error) {
     console.error("Error fetching questions:", error);
