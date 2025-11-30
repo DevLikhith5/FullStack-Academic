@@ -43,7 +43,7 @@ const App = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3, ease: "circOut" }}
-              className="w-full flex flex-col flex-grow"
+              className="w-full flex flex-col "
             >
               <AuthPage />
             </motion.div>
@@ -54,7 +54,7 @@ const App = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3, ease: "circOut" }}
-              className="w-full flex flex-col flex-grow"
+              className="w-full flex flex-col "
             >
               <LandingPage />
             </motion.div>
@@ -65,7 +65,7 @@ const App = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3, ease: "circOut" }}
-              className="w-full flex flex-col flex-grow"
+              className="w-full flex flex-col "
             >
               <LoadingScreen />
             </motion.div>
@@ -76,7 +76,7 @@ const App = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3, ease: "circOut" }}
-              className="w-full flex flex-col flex-grow"
+              className="w-full flex flex-col "
             >
               <div className="flex flex-col items-center justify-center min-h-[50vh] text-center p-8">
                 <div className="border-4 border-black p-8 bg-brut-red text-white shadow-hard max-w-md">
@@ -95,7 +95,7 @@ const App = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3, ease: "circOut" }}
-              className="w-full flex flex-col flex-grow"
+              className="w-full flex flex-col "
             >
               <QuizEngine />
             </motion.div>
@@ -106,7 +106,7 @@ const App = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3, ease: "circOut" }}
-              className="w-full flex flex-col flex-grow"
+              className="w-full flex flex-col "
             >
               <HistoryView />
             </motion.div>
@@ -117,7 +117,7 @@ const App = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3, ease: "circOut" }}
-              className="w-full flex flex-col flex-grow"
+              className="w-full flex flex-col "
             >
               {isReviewMode ? (
                 <ReviewList
