@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+
+
+/* Tailwind v4 layer overrides */
+@theme {
+  --font-sans: "Space Grotesk", sans-serif;
+  --font-mono: "Space Mono", monospace;
+
+  --color-brut-black: #000000;
+  --color-brut-white: #ffffff;
+  --color-brut-red: #ff2222;
+  --color-brut-cyan: #00aeef;
+  --color-brut-green: #00c853;
+  --color-brut-orange: #ff6d00;
+
+  --shadow-hard: 8px 8px 0px 0px #000000;
+  --shadow-hard-sm: 4px 4px 0px 0px #000000;
+}
+
+/* Base styles */
+body {
+  background-color: var(--color-brut-white);
+  color: var(--color-brut-black);
+  font-family: var(--font-sans);
+}
+
+/* Custom brutal scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff2222;
+  border: 2px solid #000000;
+}

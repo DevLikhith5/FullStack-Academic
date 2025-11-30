@@ -8,8 +8,11 @@ import { useGameStore } from '../store';
 import { playSound } from '../utils/sound';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import { useNavigate } from 'react-router-dom';
+
 const QuizEngine = () => {
     const { questions, currentQuestionIndex, config, answerQuestion, nextQuestion, resetGame } = useGameStore();
+    const navigate = useNavigate();
 
     const currentQuestion = questions[currentQuestionIndex];
 
@@ -17,6 +20,7 @@ const QuizEngine = () => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [isAnswerLocked, setIsAnswerLocked] = useState(false);
     const [shuffledOptions, setShuffledOptions] = useState([]);
+    const [pendingAnswer, setPendingAnswer] = useState(null);
 
 
     const processedAnswerRef = useRef(null);
@@ -28,6 +32,7 @@ const QuizEngine = () => {
             setTimer(QUESTION_TIMER_SECONDS);
             setIsAnswerLocked(false);
             setSelectedOption(null);
+            setPendingAnswer(null);
             processedAnswerRef.current = null;
         }
     }, [currentQuestion]);
@@ -72,9 +77,12 @@ const QuizEngine = () => {
             timeSpent: QUESTION_TIMER_SECONDS - timer
         };
 
+        setPendingAnswer(newAnswer);
+    };
 
-        setTimeout(() => {
-            answerQuestion(newAnswer);
+    const handleNext = () => {
+        if (pendingAnswer) {
+            answerQuestion(pendingAnswer);
 
             const totalQuestions = questions.length;
             const answeredCount = useGameStore.getState().userAnswers.length;
@@ -83,9 +91,9 @@ const QuizEngine = () => {
                 nextQuestion();
             } else {
                 playSound('finish');
+                navigate('/results');
             }
-
-        }, 1500);
+        }
     };
 
 
@@ -107,7 +115,7 @@ const QuizEngine = () => {
             {/* Header with Exit Button */}
             <div className="flex justify-end">
                 <BrutalistButton
-                    onClick={resetGame}
+                    onClick={() => { resetGame(); navigate('/'); }}
                     variant="outline"
                     className="border-2 h-10 text-sm px-4 hover:bg-brut-red hover:text-white hover:border-black"
                 >
@@ -224,6 +232,27 @@ const QuizEngine = () => {
                             })}
                         </div>
                     </motion.div>
+                </AnimatePresence>
+            </div>
+
+            {/* Next Button Area */}
+            <div className="h-20 flex items-center justify-end">
+                <AnimatePresence>
+                    {isAnswerLocked && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 20 }}
+                        >
+                            <BrutalistButton
+                                onClick={handleNext}
+                                size="lg"
+                                className="bg-black text-white hover:bg-brut-green hover:text-black border-4 border-black shadow-hard"
+                            >
+                                {currentQuestionIndex < questions.length - 1 ? "NEXT QUESTION" : "FINISH QUIZ"}
+                            </BrutalistButton>
+                        </motion.div>
+                    )}
                 </AnimatePresence>
             </div>
 

@@ -17,7 +17,6 @@ import { useEffect } from 'react';
 
 const App = () => {
   const {
-    view,
     questions,
     userAnswers,
     isReviewMode,
@@ -26,39 +25,11 @@ const App = () => {
     retryQuiz,
     resetGame,
     setReviewMode,
-    exitReview,
-    setView
+    exitReview
   } = useGameStore();
 
   const navigate = useNavigate();
   const location = useLocation();
-
-  // Sync Store -> Router
-  useEffect(() => {
-    switch (view) {
-      case 'AUTH':
-        if (location.pathname !== '/login') navigate('/login');
-        break;
-      case 'LANDING':
-        if (location.pathname !== '/') navigate('/');
-        break;
-      case 'LOADING':
-        if (location.pathname !== '/loading') navigate('/loading');
-        break;
-      case 'ERROR':
-        if (location.pathname !== '/error') navigate('/error');
-        break;
-      case 'QUIZ':
-        if (location.pathname !== '/quiz') navigate('/quiz');
-        break;
-      case 'HISTORY':
-        if (location.pathname !== '/history') navigate('/history');
-        break;
-      case 'RESULTS':
-        if (location.pathname !== '/results') navigate('/results');
-        break;
-    }
-  }, [view, navigate, location.pathname]);
 
 
 

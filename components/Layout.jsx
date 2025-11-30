@@ -3,9 +3,11 @@ import React from 'react';
 import { useGameStore } from '../store';
 import { LogOut, User } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const Layout = ({ children }) => {
   const { resetGame, user, logout, view } = useGameStore();
+  const navigate = useNavigate();
 
   const handleTitleClick = () => {
     if (user) {
@@ -130,7 +132,10 @@ const Layout = ({ children }) => {
                   <User size={20} />
                 </div>
                 <button
-                  onClick={logout}
+                  onClick={() => {
+                    logout();
+                    navigate('/login');
+                  }}
                   className="bg-black text-white p-2 border-2 border-black hover:bg-brut-red hover:border-brut-red transition-colors"
                   title="Disconnect"
                 >

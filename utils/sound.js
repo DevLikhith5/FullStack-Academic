@@ -1,14 +1,14 @@
 
-let audioCtx: AudioContext | null = null;
+let audioCtx = null;
 
 const getCtx = () => {
   if (!audioCtx) {
-    audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    audioCtx = new (window.AudioContext || (window).webkitAudioContext)();
   }
   return audioCtx;
 };
 
-export const playSound = (type: 'correct' | 'incorrect' | 'tick' | 'start' | 'finish') => {
+export const playSound = (type) => {
   try {
     const ctx = getCtx();
     if (!ctx || ctx.state === 'suspended') {

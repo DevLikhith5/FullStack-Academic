@@ -19,12 +19,17 @@ const TOPICS = [
 ];
 
 
-const LandingPage = () => {
-  const { config, setPendingConfig, startGame, setView } = useGameStore();
+import { useNavigate } from 'react-router-dom';
 
-  const handleStart = () => {
+const LandingPage = () => {
+  const { config, setPendingConfig, startGame } = useGameStore();
+  const navigate = useNavigate();
+
+  const handleStart = async () => {
     playSound('start');
-    startGame();
+    navigate('/loading');
+    await startGame();
+    navigate('/quiz');
   };
 
   const getIcon = (topic) => {
@@ -141,7 +146,7 @@ const LandingPage = () => {
 
             <div className="mt-4">
               <BrutalistButton
-                onClick={() => setView('HISTORY')}
+                onClick={() => navigate('/history')}
                 variant="outline"
                 size="sm"
                 className="bg-white hover:bg-gray-100"
