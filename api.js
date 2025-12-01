@@ -29,3 +29,36 @@ export const fetchUserHistory = async (userId) => {
     return [];
   }
 };
+
+export const registerUser = async (userData) => {
+  try {
+    // Check if user already exists
+    const existingUser = await api.get(`/users?email=${userData.email}`);
+    if (existingUser.data.length > 0) {
+      throw new Error('User already exists');
+    }
+
+    const response = await api.post('/users', {
+      ...userData,
+      id: `user-${Date.now()}`, // Generate a simple ID
+      createdAt: new Date().toISOString()
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Registration failed:", error);
+    throw error;
+  }
+};
+
+export const loginUser = async (email, password) => {
+  try {
+    const response = await api.get(`/users?email=${email}&password=${password}`);
+    if (response.data.length > 0) {
+      return response.data[0];
+    }
+    throw new Error('Invalid credentials');
+  } catch (error) {
+    console.error("Login failed:", error);
+    throw error;
+  }
+};
