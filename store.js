@@ -98,7 +98,7 @@ export const useGameStore = create(
                 console.warn('[STORE] User not found. Quiz result NOT saved.');
             }
 
-            // set({ view: 'RESULTS' }); // Navigation handled by component
+
         }
       },
 
@@ -120,7 +120,7 @@ export const useGameStore = create(
       },
 
       resetGame: () => {
-          console.log('[STORE] resetGame called. Resetting score to 0.');
+
           set({
               currentQuestionIndex: 0,
               userAnswers: [],
@@ -152,7 +152,7 @@ export const useGameStore = create(
       }
     }),
     {
-      name: 'game-storage', // name of the item in the storage (must be unique)
+      name: 'game-storage', 
       partialize: (state) => ({ 
         user: state.user, 
         history: state.history,

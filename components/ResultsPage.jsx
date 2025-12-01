@@ -3,13 +3,6 @@ import BrutalistButton from './BrutalistButton';
 import { RefreshCw, List, AlertTriangle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-// interface ResultsPageProps {
-//   questions: Question[];
-//   userAnswers: UserAnswer[];
-//   onRetry: () => void;
-//   onReview: (filter: 'ALL' | 'INCORRECT') => void;
-//   onHome: () => void;
-// }
 
 import { useNavigate } from 'react-router-dom';
 

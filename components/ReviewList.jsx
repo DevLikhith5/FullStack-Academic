@@ -2,12 +2,6 @@ import React from 'react';
 import BrutalistButton from './BrutalistButton';
 import { Check, X, ArrowLeft } from 'lucide-react';
 
-// interface ReviewListProps {
-//   questions: Question[];
-//   userAnswers: UserAnswer[];
-//   filter: 'ALL' | 'INCORRECT';
-//   onBack: () => void;
-// }
 
 const ReviewList = ({ questions, userAnswers, filter, onBack }) => {
   const filteredData = userAnswers.map(ans => {

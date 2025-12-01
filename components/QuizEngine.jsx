@@ -132,7 +132,7 @@ const QuizEngine = () => {
                     </span>
                     {/* Background pattern for Custom */}
                     {config.topic === 'Custom' && (
-                        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:8px_8px]"></div>
+                        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#000_1px,transparent_1px)] "></div>
                     )}
                 </div>
                 <div className="border-4 border-black p-3 bg-white shadow-hard-sm flex flex-col justify-center items-center relative overflow-hidden">
@@ -174,7 +174,7 @@ const QuizEngine = () => {
             </div>
 
             {/* Question Area */}
-            <div className="flex-grow flex flex-col justify-center relative overflow-hidden min-h-[400px] p-6">
+            <div className=" flex flex-col justify-center relative overflow-hidden min-h-[400px] p-6">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentQuestion.id}
@@ -210,7 +210,7 @@ const QuizEngine = () => {
 
                                 return (
                                     <BrutalistButton
-                                        key={`${currentQuestion.id}-${idx}`}
+                                        key={`${currentQuestion.id}-${idx}-${variant}`}
                                         variant={variant}
                                         onClick={() => handleAnswerSubmit(option)}
                                         disabled={isAnswerLocked}

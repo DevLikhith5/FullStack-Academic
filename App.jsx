@@ -28,7 +28,7 @@ const App = () => {
     exitReview
   } = useGameStore();
 
-  const navigate = useNavigate();
+
   const location = useLocation();
 
 
